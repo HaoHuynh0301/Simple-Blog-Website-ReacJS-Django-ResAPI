@@ -28,24 +28,25 @@ class BlogViews(APIView):
 class BlogViewsDetail(APIView):
     def get_object(self, pk):
         try:
-            blogs = models.Blog.objects.get(pk = pk)
+            return models.Blog.objects.get(pk = pk)
         except models.Blog.DoesNotExist:
             return Response(status = status.HTTP_404_NOT_FOUND)
         
     def get(self, request, pk):
-        blog = self.get_object(pk = pk)
+        blog = self.get_object(pk)
         serializer = BlogSerializer(blog)
         return Response(serializer.data)
     
     def delete(self, request, pk):
-        blog = self.get_object(pk = pk)
+        blog = self.get_object(pk)
         blog.delete()
         return Response(status = status.HTTP_400_BAD_REQUEST) 
     
     def put(self, request, pk):
-        blog = self.get_object(pk = pk)
+        blog = self.get_object(pk)
         serializer = BlogSerializer(blog, data = request.data)       
         if serializer.is_valid():
+            serializer.save()
             return Response(serializer.data)
         else: return Response(serializer.errors, status = status.HTTP_404_NOT_FOUND)
         
