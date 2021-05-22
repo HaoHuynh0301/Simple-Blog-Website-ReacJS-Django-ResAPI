@@ -13,6 +13,10 @@ class Home extends Component{
           }
           this.fetchTasks = this.fetchTasks.bind(this);
       };
+
+      componentDidMount() {
+        this.fetchTasks();
+      }
     
       fetchTasks() {
         fetch('http://127.0.0.1:8000/api/list/')
@@ -36,12 +40,13 @@ class Home extends Component{
                             <div key = {index} class="post-preview">
                                 <a href="#">
                                     <h2 className="post-title">
-                                    {post.title}
+                                        {post.title}
                                     </h2>
                                     <h3 className="post-subtitle">
-                                    {post.content}
+                                        {post.content}
                                     </h3>
                                 </a>
+                                <p className="post-meta">Posted on {post.date_pushed}</p>
                             </div>
                             )
                         })}
