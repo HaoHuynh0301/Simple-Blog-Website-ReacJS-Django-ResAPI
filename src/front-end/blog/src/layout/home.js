@@ -1,4 +1,10 @@
 import React, { Component } from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 class Home extends Component{
     constructor(props) {
@@ -35,24 +41,24 @@ class Home extends Component{
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-8 col-md-10 mx-auto">
-                        {posts.map(function(post, index){
-                            return (
-                            <div key = {index} class="post-preview">
-                                <a href="#">
-                                    <h2 className="post-title">
-                                        {post.title}
-                                    </h2>
-                                    <h3 className="post-subtitle">
-                                        {post.content}
-                                    </h3>
-                                </a>
-                                <p className="post-meta">Posted on {post.date_pushed}</p>
-                            </div>
-                            )
-                        })}
-                        <div className="clearfix">
-                            <a className="btn btn-primary float-right" href="#">Older Posts →</a>
-                        </div>
+                          {posts.map(function(post, index){
+                              return (
+                              <div key = {index} class="post-preview">
+                                  <Link to={"/detail/" + post.id}>
+                                      <h2 className="post-title">
+                                          {post.title}
+                                      </h2>
+                                      <h3 className="post-subtitle">
+                                          {post.content}
+                                      </h3>
+                                  </Link>
+                                  <p className="post-meta">Posted on {post.date_pushed}</p>
+                              </div>
+                              )
+                          })}
+                          <div className="clearfix">
+                              <a className="btn btn-primary float-right" href="#">Older Posts →</a>
+                          </div>
                         </div>
                     </div>
                 </div>

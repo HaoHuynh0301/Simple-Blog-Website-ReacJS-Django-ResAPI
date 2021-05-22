@@ -68,8 +68,8 @@ class App extends Component {
                     </header>
               <Switch>
 
-                <Route path="/detail/:id">
-                  <Detail />
+                <Route exact path="/detail/:id" component={Detail}>
+                  
                 </Route>
 
                 <Route path="/contact">
