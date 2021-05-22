@@ -11,6 +11,7 @@ import Footer from "./layout/footer.js"
 import About from "./layout/About.js"
 import Samplepost from "./layout/Samplepost.js"
 import Contact from "./layout/Contact.js"
+import Detail from "./layout/Detail.js"
 
 class App extends Component {
   constructor(props) {
@@ -50,17 +51,26 @@ class App extends Component {
                     {/* Page Header */}
                     <header className="masthead" style={{backgroundImage: 'url("/img/home-bg.jpg")'}}>
                         <div className="overlay" />
-                        <div className="container">
+                          <div className="container">
                             <div className="row">
                             <div className="col-lg-8 col-md-10 mx-auto">
                                 <div className="site-heading">
                                 <h1>Clean Blog</h1>
+                                <span className="subheading">“The scariest moment is always just before you start.”<br />Stephen King</span>
+                                <a href="#" className="btn btn-outline-light mt-3" style={{borderRadius: '50px', padding: '0.75em 1.5em'}}>
+                                  Write now
+                                </a>
                                 </div>
+                                
                             </div>
                         </div>
                     </div>
                     </header>
               <Switch>
+
+                <Route path="/detail/:id">
+                  <Detail />
+                </Route>
 
                 <Route path="/contact">
                   <Contact />
