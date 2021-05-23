@@ -1,9 +1,11 @@
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include 
 from . import views
+from rest_framework.routers import SimpleRouter
+from rest_framework.schemas import get_schema_view
 
-urlpatterns = [
-    path('', views.PostCreateView.as_view(), name='create'),
-    path('detail/<int:pk>/', views.PostDetailView.as_view(), name="detail"),
-    path('list/', views.PostListView.as_view(), name="list")
-]
+router = SimpleRouter()
+router.register('post', views.PostViewSet, basename = 'post')
+router.register('contact', views.ContactViewSet, basename = 'contact')
+
+urlpatterns = router.urls

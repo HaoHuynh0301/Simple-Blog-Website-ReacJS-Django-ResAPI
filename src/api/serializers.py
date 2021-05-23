@@ -6,3 +6,8 @@ class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Post
         fields = ['id', 'title', 'content', 'image', 'date_pushed']
+        
+class ContactSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Contact
+        fields = ['name', 'email', 'phone', 'message']

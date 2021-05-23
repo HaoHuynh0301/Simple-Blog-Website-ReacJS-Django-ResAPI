@@ -7,15 +7,11 @@ from rest_framework.views import APIView
 from rest_framework import generics
 from rest_framework import viewsets 
 
-class PostCreateView(generics.CreateAPIView):
+class PostViewSet(viewsets.ModelViewSet):
     queryset = models.Post.objects.all()
     serializer_class = serializers.PostSerializer
-    
-class PostListView(generics.ListAPIView):
-    queryset = models.Post.objects.all()
-    serializer_class = serializers.PostSerializer
-    
-class PostDetailView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = models.Post.objects.all()
-    serializer_class = serializers.PostSerializer
+
+class ContactViewSet(viewsets.ModelViewSet):
+    queryset = models.Contact.objects.all()
+    serializer_class = serializers.ContactSerializer
 

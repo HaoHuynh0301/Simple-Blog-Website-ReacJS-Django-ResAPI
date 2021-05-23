@@ -27,7 +27,7 @@ class Detail extends Component {
     }
     
     fetchTasks() {
-        fetch('http://127.0.0.1:8000/api/detail/' + this.props.match.params.id)
+        fetch('http://127.0.0.1:8000/api/post/' + this.props.match.params.id)
         .then(response => response.json())
         .then(data => 
             this.setState({
