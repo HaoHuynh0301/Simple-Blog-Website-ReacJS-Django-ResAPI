@@ -11,3 +11,6 @@ class ContactSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Contact
         fields = ['name', 'email', 'phone', 'message']
+        
+class Test(serializers.ModelSerializer):
+    pass
