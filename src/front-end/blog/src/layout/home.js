@@ -5,6 +5,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import Header from './Header.js'
 
 class Home extends Component{
     constructor(props) {
@@ -38,6 +39,7 @@ class Home extends Component{
         var posts = this.state.listPost
         return (
             <div>
+                <Header url="/img/blog.jpg" title="Show us your feeling"/>
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-8 col-md-10 mx-auto">

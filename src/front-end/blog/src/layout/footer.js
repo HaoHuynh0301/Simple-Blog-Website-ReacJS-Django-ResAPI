@@ -18,7 +18,7 @@ class Footer extends Component {
                                 </a>
                                 </li>
                                 <li className="list-inline-item">
-                                <a href="#">
+                                <a href="https://www.facebook.com/hulo.bungchay/">
                                     <span className="fa-stack fa-lg">
                                     <i className="fas fa-circle fa-stack-2x" />
                                     <i className="fab fa-facebook-f fa-stack-1x fa-inverse" />
@@ -26,7 +26,7 @@ class Footer extends Component {
                                 </a>
                                 </li>
                                 <li className="list-inline-item">
-                                <a href="#">
+                                <a href="https://github.com/HaoHuynh0301">
                                     <span className="fa-stack fa-lg">
                                     <i className="fas fa-circle fa-stack-2x" />
                                     <i className="fab fa-github fa-stack-1x fa-inverse" />

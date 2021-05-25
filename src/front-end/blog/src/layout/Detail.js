@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-  } from "react-router-dom";
 import { useHistory, useParams } from 'react-router-dom'
+import Header from './Header.js'
 
 class Detail extends Component {
     
@@ -31,20 +26,21 @@ class Detail extends Component {
         .then(response => response.json())
         .then(data => 
             this.setState({
-            listPost:data
+                listPost:data
             })
         )
     }
 
     render() {
-        var posts = this.state.listPost
+        var posts = this.state.listPost;
         return (
             <div>
+                <Header url={posts.image} title={posts.title}/>
                 <article>
                     <div className="container">
                         <div className="row">
                             <div className="col-lg-8 col-md-10 mx-auto">
-                                <p>{posts.content}</p>
+                                <p className="post-meta">{posts.content}</p>
                             </div>
                         </div>
                     </div>

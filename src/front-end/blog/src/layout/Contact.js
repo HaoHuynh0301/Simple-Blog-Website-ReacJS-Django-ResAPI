@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Header from './Header.js'
 
 class Contact extends Component {
     constructor(props) {
@@ -31,6 +32,7 @@ class Contact extends Component {
     render() {
         return (
             <div>
+                <Header url="img/contact-bg.jpg" title="Contact us"/>
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-8 col-md-10 mx-auto">
