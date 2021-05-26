@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Header from './Header.js'
 
 class Samplepost extends Component {
-
     constructor(props) {
         super(props);
           this.state = {

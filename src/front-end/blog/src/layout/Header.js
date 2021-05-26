@@ -11,11 +11,7 @@ function Header(props) {
                             <div className="site-heading">
                                 <h1>{props.title}</h1>
                                 <span className="subheading">“The scariest moment is always just before you start.”<br />Tùng Chùa</span>
-                            <a href="#" className="btn btn-outline-light mt-3" style={{borderRadius: '50px', padding: '0.75em 1.5em'}}>
-                            Write now
-                            </a>
                             </div>
-                            
                         </div>
                     </div>
                 </div>
