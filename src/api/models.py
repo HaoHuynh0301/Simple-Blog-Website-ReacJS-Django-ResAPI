@@ -27,3 +27,16 @@ class Contact(models.Model):
     
     def __str__(self):
         return str(self.name)
+    
+class Commnent(models.Model):
+    post = models.ForeignKey(Post, on_delete = models.CASCADE)
+    comment = models.TextField(blank = True, null = True)
+    
+    def __str__(self):
+        return str(self.post.title)
+    
+class Category(models.Model):
+    name = models.CharField(max_length = 255, null = False, blank = True)
+    
+    def __str__(self):
+        return str(self.name)
