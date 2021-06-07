@@ -5,7 +5,7 @@ class Login extends Component {
     render() {
         return (
             <div >
-                <Header url="/img/blog.jpg" title="Login"/>
+                <Header url="/img/blog.jpg" title="Sign in to BookSite"/>
                 <form action method="post" >
                     <div className="container d-flex justify-content-center">
                         <div className="row">
