@@ -13,10 +13,17 @@ class Author(models.Model):
     
     def __str__(self):
         return str(self.user.username)
+    
+class Category(models.Model):
+    name = models.CharField(max_length = 255, null = False, blank = True)
+    
+    def __str__(self):
+        return str(self.name)
 
 class Post(models.Model):
     title = models.CharField(max_length=255, null = False, blank = True)
     content = models.TextField()
+    catogeory = models.ForeignKey(Category, null = True , on_delete = models.SET_NULL)
     date_pushed = models.DateTimeField(auto_now_add=True)
     image = models.ImageField(null = True, blank = True)
     
@@ -47,8 +54,3 @@ class Commnent(models.Model):
     def __str__(self):
         return str(self.post.title)
     
-class Category(models.Model):
-    name = models.CharField(max_length = 255, null = False, blank = True)
-    
-    def __str__(self):
-        return str(self.name)

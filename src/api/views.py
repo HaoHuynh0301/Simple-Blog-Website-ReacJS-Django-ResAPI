@@ -13,6 +13,11 @@ class PostViewSet(generics.ListAPIView):
     queryset = models.Post.objects.all()
     serializer_class = serializers.PostSerializer
     permission_classes = [permissions.AllowAny]
+    
+class RetrievePostViewSet(generics.RetrieveAPIView):
+    queryset = models.Post.objects.all()
+    serializer_class = serializers.PostSerializer
+    permission_classes = [permissions.AllowAny]
 
 class SignInAuthor(APIView):
     def get(self, request, format = None):

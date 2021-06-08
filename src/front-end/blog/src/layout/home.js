@@ -39,7 +39,7 @@ class Home extends Component{
         var posts = this.state.listPost
         return (
             <div>
-                <Header url="/img/blog.jpg" title="Show us your feeling"/>
+                <Header url="/img/blog.jpg" title="Show us your feeling" subtitle = "“The scariest moment is always just before you start.”"/>
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-8 col-md-10 mx-auto">
