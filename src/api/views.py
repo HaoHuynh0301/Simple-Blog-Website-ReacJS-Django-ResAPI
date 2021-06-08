@@ -6,12 +6,18 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import generics
 from rest_framework import viewsets 
+from rest_framework import permissions
+from rest_framework import status
 
-class PostViewSet(viewsets.ModelViewSet):
+class PostViewSet(generics.ListAPIView):
     queryset = models.Post.objects.all()
     serializer_class = serializers.PostSerializer
+    permission_classes = [permissions.AllowAny]
 
-class ContactViewSet(viewsets.ModelViewSet):
-    queryset = models.Contact.objects.all()
-    serializer_class = serializers.ContactSerializer
+class SignInAuthor(APIView):
+    def get(self, request, format = None):
+        serializer = serializers.AuthorSerializer(data=request.data)
+        
+    
+
 

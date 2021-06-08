@@ -26,7 +26,7 @@ class Home extends Component{
       }
     
       fetchTasks() {
-        fetch('http://127.0.0.1:8000/api/post/')
+        fetch('http://127.0.0.1:8000/api/listposts/')
         .then(response => response.json())
         .then(data => 
           this.setState({
