@@ -19,9 +19,17 @@ class RetrievePostViewSet(generics.RetrieveAPIView):
     serializer_class = serializers.PostSerializer
     permission_classes = [permissions.AllowAny]
 
-class SignInAuthor(APIView):
-    def get(self, request, format = None):
-        serializer = serializers.AuthorSerializer(data=request.data)
+class SignInAuthor(generics.RetrieveUpdateAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    def post(self):
+        data = serializers.AuthorSerializer(self.request.data)
+        if not data.is_valid():
+            return Response("BAD REQUEST", status = status.HTTP_400_BAD_REQUEST)
+        print(data.data)
+        return Response("OK", status = status.HTTP_200_OK)
+            
+    
+        
         
     
 

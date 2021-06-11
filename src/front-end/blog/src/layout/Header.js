@@ -10,7 +10,7 @@ function Header(props) {
                         <div className="col-lg-8 col-md-10 mx-auto">
                             <div className="site-heading">
                                 <h1>{props.title}</h1>
-                                <span className="subheading">{props.subtitle}<br />Tùng Chùa</span>
+                                <span className="subheading">{props.subtitle}<br />Admin</span>
                                 <a href="#" className="btn btn-outline-light mt-3" style={{borderRadius: '50px', padding: '0.75em 1.5em'}}>
                                     Write now
                                 </a>
