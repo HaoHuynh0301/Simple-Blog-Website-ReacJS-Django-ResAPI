@@ -59,7 +59,7 @@ class Commnent(models.Model):
         return str(self.post.title)
     
 class MyUserManager(BaseUserManager):
-    def create_user(self, email, user_name, first_name ,password=None, **other_fields):
+    def create_user(self, email, user_name, first_name, date_of_birth, password=None):
         if not email:
             raise ValueError('Users must have an email address')
 
@@ -67,25 +67,28 @@ class MyUserManager(BaseUserManager):
             email=self.normalize_email(email),
             date_of_birth=date_of_birth,
             user_name = user_name,
+            first_name = first_name
         )
 
         user.set_password(password)
-        user.save()
+        user.save(using = self._db)
         return user
     
-    def create_superuser(self, email, user_name, first_name, password, **other_fields):
-        other_fields.setdefault('is_staff', True)
-        other_fields.setdefault('is_superuser', True)
-        other_fields.setdefault('is_active', True)
+    def create_superuser(self, email, user_name, first_name, date_of_birth, password=None):
+        user = self.create_user(
+            email = email,
+            user_name = user_name,
+            first_name = first_name,
+            date_of_birth = date_of_birth,
+            password = password
+        )
+        user.is_admin = True
+        user.is_superuser = True
+        user.save(using = self._db)
+        return user
         
-        if other_fields.get('is_staff') is not True:
-            raise ValueError('Superuser must be assigned to is_staff=True')
-        if other_fields.get('is_superuser') is not True:
-            raise ValueError('Superuser must be assigned to is_superuser=True')    
-        
-        return self.create_user(email, date_of_birth, user_name, first_name, password, **other_fields)
     
-class MyUser(AbstractBaseUser, PermissionsMixin):
+class MyUser(AbstractBaseUser):
     email = models.EmailField(
         verbose_name='email address',
         max_length=255,
@@ -96,19 +99,26 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
     date_of_birth = models.DateField()
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
 
     objects = MyUserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['user_name', 'first_name']
+    REQUIRED_FIELDS = ['user_name', 'first_name', 'date_of_birth']
 
     def __str__(self):
-        return self.email
+        return str(self.email)
 
     @property
     def is_staff(self):
         "Is the user a member of staff?"
         return self.is_admin
+    
+    def has_perm(self, perm, obj = None):
+        return True
+
+    def has_module_perms(self, app_label):
+        return True
     
     
     
