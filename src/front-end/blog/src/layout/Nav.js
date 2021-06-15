@@ -1,12 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Link
+    Link,
   } from "react-router-dom";
+import Modal from "react-bootstrap/Modal";
 
-function Nav(props) {
+function Nav() {
+    const [isOpen, setIsOpen] = React.useState(false);
+    const showModal = () => {
+        setIsOpen(true);
+      };
+    
+      const hideModal = () => {
+        setIsOpen(false);
+      };
     return (
         <div>
             {/* Navigation */}
@@ -29,12 +38,25 @@ function Nav(props) {
                             <Link className="nav-link" to="/contact">Contact</Link>
                             </li>
                             <li className="nav-item">
-                            <Link className="nav-link" to="/login">Login</Link>
+                            <Link className='nav-link' onClick={showModal}>Sign In</Link>
                             </li>
                         </ul>
                     </div>
                 </div>
             </nav>
+            <Modal show={isOpen} onHide={hideModal}>
+                <Modal.Header>
+                    <Modal.Title className = 'modal-title'>Sign in to BlogSite</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                <form method="POST" aciton name="sentMessage" id="contactForm" noValidate>
+                <input name="email" type="text" className="form-control" placeholder="Email" required style={{borderRadius: '50px', marginBottom: '10px'}} />
+                <input name="password" type="password" className="form-control" placeholder="Password" required style={{borderRadius: '50px', marginBottom: '10px'}} />
+                <button name="submit" type="submit" className="btn btn-primary" style={{borderRadius: '50px', padding: '0.5em', width: '100%'}}>Login</button>
+                </form>
+                </Modal.Body>
+            </Modal>
+            
         </div>
     );
 }
