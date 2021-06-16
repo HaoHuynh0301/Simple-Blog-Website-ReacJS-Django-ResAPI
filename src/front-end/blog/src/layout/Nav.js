@@ -9,13 +9,25 @@ import Modal from "react-bootstrap/Modal";
 
 function Nav() {
     const [isOpen, setIsOpen] = React.useState(false);
+    const [isOpenSignUp, setIsOpenSignUp] = React.useState(false);
+
     const showModal = () => {
         setIsOpen(true);
+        setIsOpenSignUp(false);
       };
     
-      const hideModal = () => {
+    const hideModal = () => {
         setIsOpen(false);
+    };
+
+    const showModalSignUp = () => {
+        setIsOpenSignUp(true);
+        setIsOpen(false)
       };
+    
+    const hideModalSignUp = () => {
+        setIsOpenSignUp(false);
+    };
     return (
         <div>
             {/* Navigation */}
@@ -40,6 +52,9 @@ function Nav() {
                             <li className="nav-item">
                             <Link className='nav-link' onClick={showModal}>Sign In</Link>
                             </li>
+                            <li className="nav-item">
+                            <Link className='nav-link' onClick={showModalSignUp}>Sign up</Link>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -49,14 +64,29 @@ function Nav() {
                     <Modal.Title className = 'modal-title'>Sign in to BlogSite</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                <form method="POST" aciton name="sentMessage" id="contactForm" noValidate>
+                <form method="POST" aciton name="sentMessage" id="signInForm" noValidate>
                 <input name="email" type="text" className="form-control" placeholder="Email" required style={{borderRadius: '50px', marginBottom: '10px'}} />
                 <input name="password" type="password" className="form-control" placeholder="Password" required style={{borderRadius: '50px', marginBottom: '10px'}} />
-                <button name="submit" type="submit" className="btn btn-primary" style={{borderRadius: '50px', padding: '0.5em', width: '100%'}}>Login</button>
+                <button name="submit" type="submit" className="btn btn-primary" style={{borderRadius: '50px', padding: '0.5em', width: '100%', marginBottom: '10px'}}>Sign in</button>
+                <div>New to BlogSite?  <span className=""><Link onClick={showModalSignUp} >Create new account</Link></span></div>
                 </form>
                 </Modal.Body>
             </Modal>
-            
+
+            <Modal show={isOpenSignUp} onHide={hideModalSignUp}>
+                <Modal.Header>
+                    <Modal.Title className = 'modal-title'>Sign Up to BlogSite</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                <form method="POST" aciton name="sentMessage" id="signUpForm" noValidate>
+                <input name="email" type="text" className="form-control" placeholder="Email" required style={{borderRadius: '50px', marginBottom: '10px'}} />
+                <input name="username" type="text" className="form-control" placeholder="Username" required style={{borderRadius: '50px', marginBottom: '10px'}} />
+                <input name="password" type="password" className="form-control" placeholder="Password" required style={{borderRadius: '50px', marginBottom: '10px'}} />
+                <button name="submit" type="submit" className="btn btn-primary" style={{borderRadius: '50px', padding: '0.5em', width: '100%', marginBottom: '10px'}}>Sisn up</button>
+                <div>Already have an account?  <span><Link onClick={showModal}>Sign in</Link></span></div>
+                </form>
+                </Modal.Body>
+            </Modal>
         </div>
     );
 }
