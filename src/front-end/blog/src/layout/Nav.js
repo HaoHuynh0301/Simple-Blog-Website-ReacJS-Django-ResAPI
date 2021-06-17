@@ -6,8 +6,12 @@ import {
     Link,
   } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
+import axiosInstance from '../axios';
+import { useHistory } from 'react-router-dom';
 
 function Nav() {
+
+    // declare for modal
     const [isOpen, setIsOpen] = React.useState(false);
     const [isOpenSignUp, setIsOpenSignUp] = React.useState(false);
 
@@ -28,6 +32,34 @@ function Nav() {
     const hideModalSignUp = () => {
         setIsOpenSignUp(false);
     };
+
+    // declare for signup
+    const history = useHistory();
+    const initialFormData = Object.freeze({
+        email: '',
+        user_name: '',
+        date_of_birth: '',
+        password: ''
+    });
+    const [formData, updateFormData] = useState(initialFormData);
+    const handleChange = (e) => {
+        updateFormData({
+            ...formData,
+            [e.target.name]: e.target.value.trim(),
+        });
+    };
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log('formData');
+        axiosInstance
+            .post('user/register/', {
+
+            })
+            .then(() => {
+
+            });
+    };
+
     return (
         <div>
             {/* Navigation */}
@@ -68,7 +100,7 @@ function Nav() {
                 <input name="email" type="text" className="form-control" placeholder="Email" required style={{borderRadius: '50px', marginBottom: '10px'}} />
                 <input name="password" type="password" className="form-control" placeholder="Password" required style={{borderRadius: '50px', marginBottom: '10px'}} />
                 <button name="submit" type="submit" className="btn btn-primary" style={{borderRadius: '50px', padding: '0.5em', width: '100%', marginBottom: '10px'}}>Sign in</button>
-                <div>New to BlogSite?  <span className=""><Link onClick={showModalSignUp} >Create new account</Link></span></div>
+                <div>New to BlogSite?  <span className=""><Link onClick={showModalSignUp} style={{color: '#00cccc'}} >Create new account</Link></span></div>
                 </form>
                 </Modal.Body>
             </Modal>
@@ -83,12 +115,12 @@ function Nav() {
                 <input name="username" type="text" className="form-control" placeholder="Username" required style={{borderRadius: '50px', marginBottom: '10px'}} />
                 <input name="password" type="password" className="form-control" placeholder="Password" required style={{borderRadius: '50px', marginBottom: '10px'}} />
                 <button name="submit" type="submit" className="btn btn-primary" style={{borderRadius: '50px', padding: '0.5em', width: '100%', marginBottom: '10px'}}>Sisn up</button>
-                <div>Already have an account?  <span><Link onClick={showModal}>Sign in</Link></span></div>
+                <div>Already have an account?  <span><Link onClick={showModal} style={{color: '#00cccc'}}>Sign in</Link></span></div>
                 </form>
                 </Modal.Body>
             </Modal>
         </div>
-    );
+    ); 
 }
 
 export default Nav;
