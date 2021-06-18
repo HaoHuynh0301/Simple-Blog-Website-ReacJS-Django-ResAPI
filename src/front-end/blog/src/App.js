@@ -11,7 +11,6 @@ import About from "./layout/About.js"
 import Samplepost from "./layout/Samplepost.js"
 import Contact from "./layout/Contact.js"
 import Detail from "./layout/Detail.js"
-import Login from "./layout/Login.js"
 import Nav from "./layout/Nav.js"
 
 
@@ -22,9 +21,6 @@ class App extends Component {
           <div className="App">
               <Nav />
               <Switch>
-                <Route path="/login">
-                  <Login/>
-                </Route>
 
                 <Route exact path="/detail/:id" component={Detail}> 
                 </Route>

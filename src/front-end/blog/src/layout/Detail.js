@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { useHistory, useParams } from 'react-router-dom'
 import Header from './Header.js'
 
 class Detail extends Component {

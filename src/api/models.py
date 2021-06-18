@@ -59,13 +59,12 @@ class Commnent(models.Model):
         return str(self.post.title)
     
 class MyUserManager(BaseUserManager):
-    def create_user(self, email, user_name, first_name, date_of_birth, password=None):
+    def create_user(self, email, user_name, first_name, password=None):
         if not email:
             raise ValueError('Users must have an email address')
 
         user = self.model(
             email=self.normalize_email(email),
-            date_of_birth=date_of_birth,
             user_name = user_name,
             first_name = first_name
         )
@@ -74,12 +73,11 @@ class MyUserManager(BaseUserManager):
         user.save(using = self._db)
         return user
     
-    def create_superuser(self, email, user_name, first_name, date_of_birth, password=None):
+    def create_superuser(self, email, user_name, first_name, password=None):
         user = self.create_user(
             email = email,
             user_name = user_name,
             first_name = first_name,
-            date_of_birth = date_of_birth,
             password = password
         )
         user.is_admin = True
@@ -96,7 +94,6 @@ class MyUser(AbstractBaseUser):
     )
     user_name = models.CharField(max_length=255, unique=True, null=True)
     first_name = models.CharField(max_length=255, blank=True, null = True) 
-    date_of_birth = models.DateField()
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
@@ -104,7 +101,7 @@ class MyUser(AbstractBaseUser):
     objects = MyUserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['user_name', 'first_name', 'date_of_birth']
+    REQUIRED_FIELDS = ['user_name', 'first_name']
 
     def __str__(self):
         return str(self.email)
