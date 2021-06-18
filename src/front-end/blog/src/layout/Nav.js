@@ -9,8 +9,9 @@ import Modal from "react-bootstrap/Modal";
 import axiosInstance from '../axios';
 import { useHistory } from 'react-router-dom';
 
-function SignUpAlert() {
-    alert("Create account successfully !");
+function SignUpAlert(message) {
+    if(message === 'signup') alert('Create account successfully !');
+    alert('Sign in successfully !');
 }
 
 function Nav() {
@@ -57,7 +58,7 @@ function Nav() {
         e.preventDefault();
         console.log('formData');
         axiosInstance
-            .post('user/register/', {
+            .post('api/user/register/', {
                 email: formData.email,
                 user_name: formData.username,
                 first_name: formData.firstname,
@@ -65,7 +66,7 @@ function Nav() {
             })
             .then(() => {
                 console.log('OK');
-                SignUpAlert();  
+                SignUpAlert('signup');  
                 showModal();
             });
     };
@@ -89,13 +90,13 @@ function Nav() {
                 email: formSignInData.email,
                 password: formSignInData.password
             })
-            .then(() => {
+            .then((res) => {
                 localStorage.setItem('access-token', res.data.access);
                 localStorage.setItem('refresh-token', res.data.refresh);
                 axiosInstance.defaults.headers['Authorization'] = 
                     'JWT' + localStorage.getItem('access-token');
-                history.push('/');
-                SignUpAlert();  
+                SignUpAlert('signin'); 
+                hideModal();
             });
     };
 
@@ -137,13 +138,13 @@ function Nav() {
                 <Modal.Body>
                 <form noValidate>
                     <input name="email" type="text" className="form-control" placeholder="Email" 
-                        
+                        onChange = {handleSignInChange}
                         required style={{borderRadius: '50px', marginBottom: '10px'}} />
                     <input name="password" type="password" className="form-control" placeholder="Password"
-                        
+                        onChange = {handleSignInChange}
                         required style={{borderRadius: '50px', marginBottom: '10px'}} />
                     <button className="btn btn-primary" 
-                        
+                        onClick = {handleSignInSubmit}
                         style={{borderRadius: '50px', padding: '0.5em', width: '100%', marginBottom: '10px'}}>Sign in</button>
                     <div>New to BlogSite?  <span className=""><Link onClick={showModalSignUp} style={{color: '#00cccc'}} >Create new account</Link></span></div>
                 </form>
