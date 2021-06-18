@@ -113,9 +113,6 @@ function Nav() {
                     <div className="collapse navbar-collapse" id="navbarResponsive">
                         <ul className="navbar-nav ml-auto">
                             <li className="nav-item">
-                            <Link to="/" classname="nav-link">Home</Link>
-                            </li>
-                            <li className="nav-item">
                             <Link className="nav-link" to="/samplepost">Sample Post</Link>
                             </li>
                             <li className="nav-item">
