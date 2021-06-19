@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
   Link
 } from "react-router-dom";
 import Header from './Header.js'
@@ -26,7 +23,7 @@ class Home extends Component{
       }
     
       fetchTasks() {
-        fetch('http://127.0.0.1:8000/api/listposts/')
+        fetch('http://127.0.0.1:8000/api/')
         .then(response => response.json())
         .then(data => 
           this.setState({

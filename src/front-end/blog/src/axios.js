@@ -36,7 +36,7 @@ axiosInstance.interceptors.response.use (
         if(
             error.response.data.code === 'token_not_valid' &&
             error.response.data.code === 401 &&
-            error.response.statusText === 'Unauthrized'
+            error.response.statusText === 'Unauthorized'
         ) {
             const refreshToken = localStorage.getItem('refresh-token');
             if(refreshToken) {
@@ -58,13 +58,17 @@ axiosInstance.interceptors.response.use (
                             return axiosInstance(originalRequest);
                         })
                         .catch((err) => {
-                            console.log('Refresh token is required');
-                            window.location.href = '/';
+                            console.log('err');
                         }) 
                 } else {
-                    window.location.href = '/';
+                   console.log("Refresh token is not expired");
+                   window.location.href = '/';
                 }
+            } else {
+                console.log("Refresh token is not available");
+                window.location.href = '/';
             }
+            return Promise.reject(error);
         }
 
     }

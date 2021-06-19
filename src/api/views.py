@@ -8,16 +8,18 @@ from rest_framework import generics
 from rest_framework import viewsets 
 from rest_framework import permissions
 from rest_framework import status
-
-class PostViewSet(generics.ListAPIView):
-    queryset = models.Post.objects.all()
-    serializer_class = serializers.PostSerializer
-    permission_classes = [permissions.AllowAny]
     
-class RetrievePostViewSet(generics.RetrieveAPIView):
+class PostList(viewsets.ViewSet):
     queryset = models.Post.objects.all()
-    serializer_class = serializers.PostSerializer
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+   
+    def list(self, request):
+        serializer_class = serializers.PostSerializer(self.queryset, many = True)
+        return Response(serializer_class.data)
+    def retrieve(self, request, pk=None):
+        post = get_object_or_404(self.queryset, pk=pk)
+        serializer_class = serializers.PostSerializer(post)
+        return Response(serializer_class.data)
 
 class RegisterUser(APIView):
     permission_classes = [permissions.AllowAny]

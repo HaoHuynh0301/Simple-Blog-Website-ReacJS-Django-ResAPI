@@ -7,7 +7,6 @@ import {
   } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
 import axiosInstance from '../axios';
-import { useHistory } from 'react-router-dom';
 
 function SignUpAlert(message) {
     if(message === 'signup') alert('Create account successfully !');
@@ -19,7 +18,6 @@ function Nav() {
     // declare for modal
     const [isOpen, setIsOpen] = React.useState(false);
     const [isOpenSignUp, setIsOpenSignUp] = React.useState(false);
-    const history = useHistory();
 
     const showModal = () => {
         setIsOpen(true);
@@ -97,7 +95,9 @@ function Nav() {
                     'JWT' + localStorage.getItem('access-token');
                 SignUpAlert('signin'); 
                 hideModal();
-            });
+            }).catch((err) => {
+                console.log(err);
+            })
     };
 
     return (
