@@ -23,10 +23,10 @@ class PostViewSet(viewsets.ModelViewSet):
     
     @action(detail=True, methods=['put'])
     def edit_post(self, request, pk = None):
-        post = get_object()
-        serializer = models.PostSerializer(data = request.data)
+        post = get_object(pk = pk)
+        serializer = models.PostSerializer(post, data = request.data)
         if serializer.is_valid():
-            post.update_post(serializer.validated_data['content'], serializer.validated_date['title'])
+            serializer.save()
             return Response("OK", status = status.HTTP_200_OK)
         else:
             return Response("BAD REQUEST", status = status.HTTP_400_BAD_REQUEST)
