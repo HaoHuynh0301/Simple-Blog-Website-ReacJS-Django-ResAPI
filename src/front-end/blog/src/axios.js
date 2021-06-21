@@ -28,6 +28,10 @@ axiosInstance.interceptors.response.use (
             );
             return Promise.reject(error);
         }
+        if(error.response.status == 401) {
+            alert('Email or password is invalid')
+            return Promise.reject(error);
+        }
         if(error.response.status == 404 &&
         originalRequest.url === baseURL + 'token/refresh/') {
             window.location.href = '/';

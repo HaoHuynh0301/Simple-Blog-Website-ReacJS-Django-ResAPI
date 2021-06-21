@@ -97,7 +97,7 @@ function Nav() {
                 hideModal();
             }).catch((err) => {
                 console.log(err);
-            })
+            });
     };
 
     return (

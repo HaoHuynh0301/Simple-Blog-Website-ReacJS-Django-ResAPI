@@ -6,15 +6,18 @@ from rest_framework.schemas import get_schema_view
 
 app_name = 'blog_api'
 
-router = DefaultRouter()
-router.register('', views.PostList, basename = 'post')
+#Define router for PostViewSet
+Postrouter = SimpleRouter()
+Postrouter.register('', views.PostViewSet, basename = 'post')
 
-urlpatterns = router.urls
+#Define router for ContactViewSet
+Contactrouter = SimpleRouter()
+Contactrouter.register('', views.ContactViewSet, basename = 'contact')
 
-# urlpatterns = [
-#     path('listposts/', views.PostViewSet.as_view(), name= 'listpost'),
-#     path('listposts/<int:pk>/', views.RetrievePostViewSet.as_view(), name = 'retrievepost'),
-#     path('user/register/', views.RegisterUser.as_view(), name = "signup")
-# ]
+urlpatterns = [
+    path('user/register/', views.RegisterUser.as_view(), name = "signup"),
+    path('post/', include(Postrouter.urls)),
+    path('contact/', include(Contactrouter.urls)),
+]
 
 

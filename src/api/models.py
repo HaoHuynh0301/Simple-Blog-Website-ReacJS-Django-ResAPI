@@ -27,7 +27,7 @@ class Category(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=255, null = False, blank = True)
     content = models.TextField()
-    catogeory = models.ForeignKey(Category, null = True , on_delete = models.PROTECT)
+    catogeory = models.ForeignKey(Category, null = True , on_delete = models.SET_NULL)
     date_pushed = models.DateTimeField(auto_now_add=True)
     image = models.ImageField(null = True, blank = True)
     

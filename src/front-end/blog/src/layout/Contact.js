@@ -17,14 +17,13 @@ class Contact extends Component {
     }
 
     handleSubmit = (event) => {
-        alert('A form was submitted: ' + this.state.message);
-    
         fetch('http://127.0.0.1:8000/api/contact/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(this.state)
           }).then(function(response) {
-            return response.json();
+                alert("Get contact Successfully");
+                return response.json();
           });
         event.preventDefault();
     }
