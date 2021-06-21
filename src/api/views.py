@@ -4,10 +4,11 @@ from . import serializers
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework import generics
+from rest_framework.decorators import action
 from rest_framework import viewsets 
 from rest_framework import permissions
 from rest_framework import status
+from rest_framework import generics
 
 class PostViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
@@ -19,21 +20,27 @@ class PostViewSet(viewsets.ModelViewSet):
     
     def get_queryset(self):
         return models.Post.objects.all()
-
+    
+    @action(detail=True, methods=['put'])
+    def edit_post(self, request, pk = None):
+        post = get_object()
+        serializer = models.PostSerializer(data = request.data)
+        if serializer.is_valid():
+            post.update_post(serializer.validated_data['content'], serializer.validated_date['title'])
+            return Response("OK", status = status.HTTP_200_OK)
+        else:
+            return Response("BAD REQUEST", status = status.HTTP_400_BAD_REQUEST)
+    
 class ContactViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.AllowAny]
     serializer_class = serializers.ContactSerializer
     queryset = models.Contact.objects.all()
-        
-
-class RegisterUser(APIView):
+    
+class UserRegister(generics.CreateAPIView):
     permission_classes = [permissions.AllowAny]
-    def post(self, request):
-        data = serializers.RegisterUserSerializer(data = request.data)
-        if not data.is_valid():
-            return Response("BAD REQUEST", status = status.HTTP_400_BAD_REQUEST)
-        data.save()
-        return Response("OK", status = status.HTTP_200_OK)
+    serializer_class = serializers.RegisterUserSerializer
+    queryset = models.MyUser.objects.all()
+
             
     
         

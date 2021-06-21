@@ -15,7 +15,7 @@ Contactrouter = SimpleRouter()
 Contactrouter.register('', views.ContactViewSet, basename = 'contact')
 
 urlpatterns = [
-    path('user/register/', views.RegisterUser.as_view(), name = "signup"),
+    path('user/', views.UserRegister.as_view(), name = "signup"),
     path('post/', include(Postrouter.urls)),
     path('contact/', include(Contactrouter.urls)),
 ]

@@ -26,4 +26,4 @@ class ContactSerializer(serializers.ModelSerializer):
         model = models.Contact
         fields = ['name', 'email', 'phone', 'message']
 
-    
+        

@@ -41,6 +41,14 @@ class Post(models.Model):
         except:
             url = ''
         return url
+        
+    @property
+    def update_post(self, newContent, newTitle):
+        try:
+            self.content = newContent
+            self.title = newTitle
+        except:
+            print("Error")
     
 class Contact(models.Model):
     name = models.CharField(max_length=255, blank = True, null = False)
