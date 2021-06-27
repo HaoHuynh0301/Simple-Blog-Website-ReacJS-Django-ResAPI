@@ -66,18 +66,18 @@ class MyUser(AbstractBaseUser):
         return True    
     
 class Category(models.Model):
-    name = models.CharField(max_length = 255, null = False, blank = True)
+    name = models.CharField(max_length = 255, blank = True)
     
     def __str__(self):
         return str(self.name)
 
 class Post(models.Model):
-    author = models.ForeignKey(MyUser, on_delete = models.CASCADE)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete = models.CASCADE)
     title = models.CharField(max_length=255, null = False, blank = True)
     content = models.TextField()
-    catogeory = models.ForeignKey(Category, null = True , on_delete = models.CASCADE)
+    category = models.ForeignKey(Category, on_delete = models.SET_NULL, null = True)
     date_pushed = models.DateTimeField(auto_now_add=True)
-    image = models.ImageField(null = True, blank = True)
+    image = models.ImageField(null = True, blank = True, upload_to = 'images/')
     
     def __str__(self):
         return str(self.title)

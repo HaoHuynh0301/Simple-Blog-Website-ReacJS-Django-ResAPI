@@ -19,18 +19,22 @@ class RegisterUserSerializer(serializers.ModelSerializer):
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Post
-        fields = ['id', 'title', 'content', 'image', 'date_pushed']
+        fields = ['id', 'title', 'content', 'image', 'date_pushed', 'category']
         
     def update(self, instance, validated_data):
         instance.content = validated_data.get('content', instance.content)
         instance.title = validated_data.get('title', instance.title)
         instance.save()
         return instance
-            
-        
+               
 class ContactSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Contact
         fields = ['name', 'email', 'phone', 'message']
+        
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Category
+        fields = ['name']
 
         
